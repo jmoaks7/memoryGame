@@ -43,10 +43,10 @@ body{
     background: #1C7CCC;
     backface-visibility: hidden;
 }
-.memory-card.flip {
+.flipped {
     transform: rotateY(180deg);
-  }
+      }
 
-  .front-face {
+  /* .front-face {
       transform: rotateY(180deg);
-  }
+  } */

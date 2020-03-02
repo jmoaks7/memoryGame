@@ -3,9 +3,8 @@
 // look up concat
 // find a shuffle function to use
 const cards = document.querySelectorAll('.memory-card');
+// const backFaces = document.querySelectorAll('.back-face');
 let cardTotal = cards.length;
-let firstChoice = null;
-let secondChoice = null;
 let cardsFlipped = 0;
 let currentScore = 0; //set current score to 0: done 
 let bestScore = localStorage.getItem("best-score");
@@ -18,8 +17,12 @@ if (bestScore) {
 }
 //pull best score from local storage and set to display: done 
 
-const game = document.querySelector('.memory-game');
-game.addEventListener('click', onClick);
+// const game = document.querySelector('.memory-game');
+// game.addEventListener('click', onClick); <--- does not work, can't remove eventlisteners from the children elements
+
+for (let card of cards) {
+    card.addEventListener('click', onClick);
+}
 
 function newGame() {
     let imageArray = ["images/1.gif", "images/2.gif", "images/3.gif", "images/4.gif", "images/5.gif", "images/6.gif", "images/7.gif", "images/8.gif", "images/9.gif", "images/10.gif", "images/11.gif", "images/12.gif"];
@@ -47,6 +50,8 @@ function shuffle(array) {
 // create the array for srcimages, double it, shuffle it, assign one to each card;
 
 function onClick(e) {
+    let firstChoice = null;
+    let secondChoice = null;
     currentScore += 1;
     e.target.classList.toggle('.flipped');
     if (!firstChoice) {
@@ -54,22 +59,24 @@ function onClick(e) {
     } else {
         secondChoice = e.target
     }
-    if (firstChoice.src === secondChoice.src) {
-        firstChoice.removeEventListener('click', onClick);
-        secondChoice.removeEventListener('click', onClick);
-        cardsFlipped += 2;
-        firstChoice = null;
-        secondChoice = null;
-    } else {
-        setTimeout(function () {
-            firstChoice.classList.toggle('.flipped');
-            secondChoice.classList.toggle('.flipped');
+    if (firstChoice && secondChoice) {
+        if (firstChoice.src === secondChoice.src) {
+            firstChoice.removeEventListener('click', onClick);
+            secondChoice.removeEventListener('click', onClick);
+            cardsFlipped += 2;
             firstChoice = null;
             secondChoice = null;
-        }, 1000)
-    }
-    if (cardsFlipped === cardTotal) {
-        endGame();
+        } else {
+            setTimeout(function () {
+                firstChoice.classList.toggle('.flipped');
+                secondChoice.classList.toggle('.flipped');
+                firstChoice = null;
+                secondChoice = null;
+            }, 1000)
+        }
+        if (cardsFlipped === cardTotal) {
+            endGame();
+        }
     }
 }
 //add one to currentscore:done
