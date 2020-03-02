@@ -43,9 +43,17 @@ body{
     background: #1C7CCC;
     backface-visibility: hidden;
 }
+.black {
+    background-color: black;
+}
+
+.blue {
+    background-color: blue;
+}
+
 .flipped {
     transform: rotateY(180deg);
-      }
+ }
 
   /* .front-face {
       transform: rotateY(180deg);

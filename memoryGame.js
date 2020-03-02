@@ -68,8 +68,8 @@ function onClick(e) {
             secondChoice = null;
         } else {
             setTimeout(function () {
-                firstChoice.classList.toggle('.flipped');
-                secondChoice.classList.toggle('.flipped');
+                firstChoice.classList.toggle('flipped');
+                secondChoice.classList.toggle('flipped');
                 firstChoice = null;
                 secondChoice = null;
             }, 1000)
